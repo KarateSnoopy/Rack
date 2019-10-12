@@ -30,6 +30,8 @@ struct Widget {
 	/** If set to true, parent will delete Widget in the next step() */
 	bool requestedDelete = false;
 
+	bool canBeDragged = true;
+
 	virtual ~Widget();
 
 	void setPosition(math::Vec pos);

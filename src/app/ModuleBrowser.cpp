@@ -85,6 +85,7 @@ static ModuleWidget* chooseModel(plugin::Model* model) {
 	// Create module
 	ModuleWidget* moduleWidget = model->createModuleWidget();
 	assert(moduleWidget);
+	moduleWidget->canBeDragged = false;
 	APP->scene->rack->addModuleAtMouse(moduleWidget);
 
 	// Push ModuleAdd history action

@@ -130,11 +130,26 @@ bool State::handleButton(math::Vec pos, int button, int action, int mods) {
 	widget::Widget* clickedWidget = cButton.target;
 
 	if (action == GLFW_PRESS) {
-		setDragged(clickedWidget, button);
+		if( clickedWidget )
+		{
+			if( clickedWidget->canBeDragged )
+			{
+				setDragged(clickedWidget, button);
+			}
+		}
+		else
+		{
+			setDragged(clickedWidget, button);
+		}
 	}
 
 	if (action == GLFW_RELEASE) {
 		setDragHovered(NULL);
+
+		if( clickedWidget && !clickedWidget->canBeDragged )
+		{
+			clickedWidget->canBeDragged = true;
+		}
 
 		if (clickedWidget && draggedWidget) {
 			// DragDrop
