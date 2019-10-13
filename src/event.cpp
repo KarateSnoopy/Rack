@@ -132,7 +132,7 @@ bool State::handleButton(math::Vec pos, int button, int action, int mods) {
 	if (action == GLFW_PRESS) {
 		if( clickedWidget )
 		{
-			if( clickedWidget->canBeDragged )
+			if( clickedWidget->ignoreDragForNSteps == 0 )
 			{
 				setDragged(clickedWidget, button);
 			}
@@ -145,11 +145,6 @@ bool State::handleButton(math::Vec pos, int button, int action, int mods) {
 
 	if (action == GLFW_RELEASE) {
 		setDragHovered(NULL);
-
-		if( clickedWidget && !clickedWidget->canBeDragged )
-		{
-			clickedWidget->canBeDragged = true;
-		}
 
 		if (clickedWidget && draggedWidget) {
 			// DragDrop
