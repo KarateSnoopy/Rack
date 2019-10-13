@@ -30,7 +30,7 @@ struct Widget {
 	/** If set to true, parent will delete Widget in the next step() */
 	bool requestedDelete = false;
 
-	bool canBeDragged = true;
+	int ignoreDragForNSteps = 0;
 
 	virtual ~Widget();
 

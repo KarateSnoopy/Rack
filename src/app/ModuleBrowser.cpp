@@ -85,7 +85,7 @@ static ModuleWidget* chooseModel(plugin::Model* model) {
 	// Create module
 	ModuleWidget* moduleWidget = model->createModuleWidget();
 	assert(moduleWidget);
-	moduleWidget->canBeDragged = false;
+	moduleWidget->ignoreDragForNSteps = 10;
 	APP->scene->rack->addModuleAtMouse(moduleWidget);
 
 	// Push ModuleAdd history action
@@ -546,7 +546,7 @@ struct ModuleBrowser : widget::OpaqueWidget {
 			if (!item->disabled)
 				brandsLen++;
 		}
-		sidebar->brandLabel->text = string::f("Brands (%d)", brandsLen);
+		sidebar->brandLabel->text = string::f("=== Brands === (%d)", brandsLen);
 
 		int tagsLen = 0;
 		for (Widget* w : sidebar->tagList->children) {
@@ -556,7 +556,7 @@ struct ModuleBrowser : widget::OpaqueWidget {
 			if (!item->disabled)
 				tagsLen++;
 		}
-		sidebar->tagLabel->text = string::f("Tags (%d)", tagsLen);
+		sidebar->tagLabel->text = string::f("=== Tags === (%d)", tagsLen);
 
 		// Count models
 		int modelsLen = 0;
