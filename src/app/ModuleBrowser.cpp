@@ -481,11 +481,31 @@ struct ModuleBrowser : widget::OpaqueWidget {
 		// Reset scroll position
 		modelScroll->offset = math::Vec();
 
+		int blankTagId = -1;
+		for (int tagId = 0; tagId < (int) tag::tagAliases.size(); tagId++) 
+		{
+			if( tag::tagAliases[tagId][0] == "Blank" )
+			{
+				blankTagId = tagId;
+				break;
+			}
+		}
+
 		// Filter ModelBoxes
 		for (Widget* w : modelContainer->children) {
 			ModelBox* m = dynamic_cast<ModelBox*>(w);
 			assert(m);
 			m->visible = isModelVisible(m->model, search, brand, tagId);
+
+			// filter out blank panels
+			if( blankTagId != -1 )
+			{
+				auto it = std::find(m->model->tags.begin(), m->model->tags.end(), blankTagId);
+				if (it != m->model->tags.end())
+				{
+					m->visible = false;
+				}
+			}
 		}
 
 		// Sort ModelBoxes
