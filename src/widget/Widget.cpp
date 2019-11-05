@@ -134,6 +134,10 @@ void Widget::clearChildren() {
 }
 
 void Widget::step() {
+	if( ignoreDragForNSteps > 0 )
+	{
+		ignoreDragForNSteps--;
+	}
 	for (auto it = children.begin(); it != children.end();) {
 		Widget* child = *it;
 		// Delete children if a delete is requested

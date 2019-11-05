@@ -130,7 +130,17 @@ bool State::handleButton(math::Vec pos, int button, int action, int mods) {
 	widget::Widget* clickedWidget = cButton.target;
 
 	if (action == GLFW_PRESS) {
-		setDragged(clickedWidget, button);
+		if( clickedWidget )
+		{
+			if( clickedWidget->ignoreDragForNSteps == 0 )
+			{
+				setDragged(clickedWidget, button);
+			}
+		}
+		else
+		{
+			setDragged(clickedWidget, button);
+		}
 	}
 
 	if (action == GLFW_RELEASE) {
